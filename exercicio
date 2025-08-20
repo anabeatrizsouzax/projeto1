@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>login</h1>
+    <h2>digite seu email</h2>
+    <input type="text" id="email">
+    <h2>digite sua senha</h2>
+    <input type="password" id="senha"> <br> <br>
+    <button onclick="registrar()">Registrar</button>
+    <button onclick="entrar()">Entrar</button>
+
+
+    <script>
+        let usarios = JSON.parse(localStorage.getItem('usarios')) || [];
+        let email = document.getElementById("email")
+        let senha = document.getElementById("senha")
+
+        function registrar() {
+
+
+            let usario = {
+                senha: senha.value,
+                email: email.value
+
+            }
+            usarios.push(usario)
+            localStorage.setItem('usarios', JSON.stringify(usarios))
+
+
+        }
+
+
+        function entrar() {
+            let encontar = false;
+            for (i = 0; i < usarios.length; i++) {
+                if (usarios[i].email === email.value && usarios[i].senha === senha.value) {
+                    encontar = true;
+                    break;
+
+                }
+            } 
+            
+            if (encontar) {
+                alert("login realizado")
+            } else {
+                alert("login incorreto")
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>
